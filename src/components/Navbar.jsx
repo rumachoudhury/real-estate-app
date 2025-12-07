@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
+import { motion } from "framer-motion";
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -11,7 +11,13 @@ function Navbar() {
           {/* Left: Logo and text */}
           <Link to="/">
             <div className="flex items-center gap-3">
-              <img src="/logo (2).png" alt="Logo" className="w-14 h-14" />
+              <motion.img
+                animate={{ rotate: 360, scale: [1, 2, 1] }}
+                transition={{ duration: 2 }}
+                src="/logo (2).png"
+                alt="Logo"
+                className="w-14 h-14"
+              />
               <h1 className="font-bold text-3xl">RealEstatePro</h1>
             </div>
           </Link>
