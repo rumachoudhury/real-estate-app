@@ -1,11 +1,12 @@
 import React from "react";
 
 import SearchBar from "../../components/SearchBar.jsx";
-import { motion } from "framer-motion";
+import GradientCursor from "../../components/GradientCursor.jsx";
 
 function HomePage() {
   return (
     <div className="flex flex-col md:flex-row items-center justify-between px-6 md:px-16 pt-24 sm:pt-32 text-center md:text-left">
+      <GradientCursor />
       {/* Left Side - Text Section */}
       <div className="flex flex-col items-center md:items-start w-full md:w-1/2 mb-8 md:mb-0">
         <h1 className="text-4xl md:text-5xl font-bold text-blue-600 mb-4">

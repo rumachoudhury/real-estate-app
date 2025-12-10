@@ -2,12 +2,11 @@ import React from "react";
 import { singlePageData, userData } from "../../lib/dummydata";
 import Map from "../../components/map/Map.jsx";
 import Slider from "../../components/slider/Slider";
-import { motion } from "framer-motion";
 
 export default function SinglePage() {
   return (
     // <div className="w-full flex flex-col lg:flex-row items-start gap-10 px-4 md:px-10 py-10 lg:py-16">
-    <motion.div
+    <div
       className="w-full flex flex-col lg:flex-row items-start gap-10 px-4 md:px-10 py-10 lg:py-16"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -21,7 +20,7 @@ export default function SinglePage() {
         {/* Property Info */}
         <div className="text-gray-500 gap-3 flex flex-col items-center mt-5 w-full">
           <div className="flex flex-col md:flex-row gap-6 items-center w-full">
-            <motion.div className="flex flex-col gap-3 flex-1 text-center md:text-left">
+            <div className="flex flex-col gap-3 flex-1 text-center md:text-left">
               <h1 className="font-bold text-2xl text-black">
                 {singlePageData.title}
               </h1>
@@ -34,7 +33,7 @@ export default function SinglePage() {
               <div className="text-sm  py-1 px-4 rounded font-semibold inline-block mt-2">
                 ${singlePageData.price} / month
               </div>
-            </motion.div>
+            </div>
 
             {/* User Card */}
             <div className="flex flex-col items-center p-4 bg-amber-100 rounded-lg shadow-sm w-full md:w-auto mt-4 md:mt-0">
@@ -168,6 +167,6 @@ export default function SinglePage() {
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

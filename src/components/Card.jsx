@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import React from "react";
-import { motion } from "framer-motion";
+
+import { motion } from "motion/react";
 function Card({ item }) {
   return (
     <div className="flex flex-col gap-6 p-4">

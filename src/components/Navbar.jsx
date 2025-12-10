@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import DotParticleCanvas from "../components/DotParticleCanvas";
+
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -11,7 +12,7 @@ function Navbar() {
           {/* Left: Logo and text */}
           <Link to="/">
             <div className="flex items-center gap-3">
-              <motion.img
+              <img
                 animate={{ rotate: 360, scale: [1, 2, 1] }}
                 transition={{ duration: 2 }}
                 src="/logo (2).png"
@@ -32,10 +33,6 @@ function Navbar() {
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center justify-center gap-6 text-lg">
-          {/* <Link to="/">Home</Link>
-          <Link to="/register">Register</Link>
-          <Link to="/about">About</Link>
-          <Link to="/contact">Contact</Link> */}
           <Link to="/signin">SignIn</Link>
           <Link
             to="/signup"
