@@ -26,6 +26,7 @@ export const getUser = async (req, res) => {
   }
 };
 
+// Update user controller
 export const updateUser = async (req, res) => {
   const id = req.params.id;
   const tokenUserId = req.userId;
@@ -54,7 +55,7 @@ export const updateUser = async (req, res) => {
       .json({ message: "User updated successfully", data: updatedUser });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Failed to update user" });
+    res.status(500).json({ message: "Failed to updated user" });
   }
 };
 
