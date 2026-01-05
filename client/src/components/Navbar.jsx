@@ -18,11 +18,11 @@ function Navbar() {
               <img
                 // animate={{ rotate: 360, scale: [1, 2, 1] }}
                 // transition={{ duration: 2 }}
-                animate={{ opacity: 1, y: 0 }}
-                initial={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.8 }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                // animate={{ opacity: 1, y: 0 }}
+                // initial={{ opacity: 0, y: -20 }}
+                // transition={{ duration: 0.8 }}
+                // whileHover={{ scale: 1.05 }}
+                // whileTap={{ scale: 0.95 }}
                 src="/logo (2).png"
                 alt="Logo"
                 className="w-14 h-14"

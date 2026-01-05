@@ -96,9 +96,11 @@ export default function ProfilePage() {
           {/* MY LIST */}
           <div className="title flex flex-col sm:flex-row justify-between gap-3 p-4">
             <h1 className="text-xl font-semibold">My List</h1>
-            <button className="bg-amber-100 text-sm font-semibold px-4 py-2 rounded">
-              Create New Post
-            </button>
+            <Link to="/add">
+              <button className="bg-amber-100 text-sm font-semibold px-4 py-2 rounded">
+                Create New Post
+              </button>
+            </Link>
           </div>
 
           <List />

@@ -7,7 +7,11 @@ function Map({ items = [] }) {
   return (
     <MapContainer
       //   center={[39.8283, -98.5795]} // geographic center of USA
-      center={[40.7128, -74.006]} // New York City
+      center={
+        items.length === 1
+          ? [items[0].latitude, items[0].longitude]
+          : [40.7128, -74.006]
+      } // New York City
       //   center={[36.7783, -119.4179]} // California center
 
       zoom={7}

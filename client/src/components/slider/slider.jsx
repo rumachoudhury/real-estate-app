@@ -9,7 +9,7 @@ function Slider({ images }) {
   };
 
   const nextImage = () => {
-    setImageIndex((prev) => (prev === images.length - 1 ? 1 : prev + 1)); // if at last image, go to first
+    setImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1)); // if at last image, go to first
   };
 
   if (!isOpen) return null; // hide slider when closed
@@ -19,7 +19,7 @@ function Slider({ images }) {
       {/* Big image with arrows */}
       <div className="relative w-full">
         <img
-          src={images[imageIndex]}
+          src={images[imageIndex] || "/placeholder.png"}
           alt={`main-${imageIndex}`}
           onClick={() => setIsOpen(true)}
           className="w-full h-96 md:h-[500px] object-cover rounded-lg cursor-pointer"
@@ -79,7 +79,7 @@ function Slider({ images }) {
       </div>
 
       {/* Small images */}
-      <div className="flex flex-row gap-2 flex-wrap mt-2">
+      {/* <div className="flex flex-row gap-2 flex-wrap mt-2">
         {images.map((image, index) => (
           <img
             key={index}
@@ -91,7 +91,27 @@ function Slider({ images }) {
             onClick={() => setImageIndex(index)}
           />
         ))}
-      </div>
+      </div> */}
+
+      {images.length > 0 ? (
+        images.map((image, index) => (
+          <img
+            key={index}
+            src={image}
+            alt={`preview-${index}`}
+            className={`w-24 h-24 object-cover rounded-lg cursor-pointer border-2 ${
+              imageIndex === index ? "border-amber-500" : "border-transparent"
+            }`}
+            onClick={() => setImageIndex(index)}
+          />
+        ))
+      ) : (
+        <img
+          src="/placeholder-property.png"
+          alt="placeholder"
+          className="w-24 h-24 object-cover rounded-lg"
+        />
+      )}
     </div>
   );
 }

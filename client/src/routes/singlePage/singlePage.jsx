@@ -1,37 +1,37 @@
 import React from "react";
-import { singlePageData, userData } from "../../lib/dummydata";
+// import { singlePageData, userData } from "../../lib/dummydata";
 import Map from "../../components/map/Map.jsx";
 import Slider from "../../components/slider/Slider";
+import { useLoaderData } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export default function SinglePage() {
+  const post = useLoaderData();
+  const { id } = useParams();
+  console.log(id);
+
+  console.log(post);
+
   return (
-    // <div className="w-full flex flex-col lg:flex-row items-start gap-10 px-4 md:px-10 py-10 lg:py-16">
-    <div
-      className="w-full flex flex-col lg:flex-row items-start gap-10 px-4 md:px-10 py-10 lg:py-16"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-    >
+    <div className="w-full flex flex-col lg:flex-row items-start gap-10 px-4 md:px-10 py-10 lg:py-16">
       {/* LEFT */}
       <div className="flex flex-col items-center w-full lg:w-2/3">
         {/* Images */}
-        <Slider images={singlePageData.images} />
+        <Slider images={post.images || []} />
 
         {/* Property Info */}
         <div className="text-gray-500 gap-3 flex flex-col items-center mt-5 w-full">
           <div className="flex flex-col md:flex-row gap-6 items-center w-full">
             <div className="flex flex-col gap-3 flex-1 text-center md:text-left">
-              <h1 className="font-bold text-2xl text-black">
-                {singlePageData.title}
-              </h1>
+              <h1 className="font-bold text-2xl text-black">{post.title}</h1>
 
               <div className="flex items-center justify-center md:justify-start gap-2">
                 <img src="/pin.png" alt="" className="w-5 h-5" />
-                <span className="text-sm">{singlePageData.address}</span>
+                <span className="text-sm">{post.address}</span>
               </div>
 
               <div className="text-sm  py-1 px-4 rounded font-semibold inline-block mt-2">
-                ${singlePageData.price} / month
+                ${post.price} / month
               </div>
             </div>
 
@@ -39,20 +39,21 @@ export default function SinglePage() {
             <div className="flex flex-col items-center p-4 bg-amber-100 rounded-lg shadow-sm w-full md:w-auto mt-4 md:mt-0">
               <div className="w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden bg-amber-300 shadow">
                 <img
-                  src={userData.img}
-                  alt={userData.name}
+                  src={post.user?.avatar || "/avatar.png"}
+                  // alt={post.user?.username || "User"}
+                  alt=""
                   className="w-full h-full object-cover object-center"
                 />
               </div>
 
               <span className="text-center text-black mt-4 text-lg font-medium">
-                {userData.name}
+                {post.user?.username || "Unknown User"}
               </span>
             </div>
           </div>
 
           <div className="mt-5 text-gray-400 text-sm leading-relaxed text-center md:text-left">
-            {singlePageData.description}
+            {post.description}
           </div>
         </div>
       </div>
@@ -70,6 +71,11 @@ export default function SinglePage() {
             <div className="flex items-center gap-2 bg-white p-4 rounded-md">
               <img src="utility.png" alt="" className="w-6 h-6" />
               <p className="font-semibold">Utilities Included</p>
+              {post.postDetails?.utilities === "owner" ? (
+                <p>Owner is responsible</p>
+              ) : (
+                <p>Tenant is responsible</p>
+              )}
             </div>
 
             <div className="flex items-center gap-2 bg-white p-4 rounded-md">
@@ -77,6 +83,11 @@ export default function SinglePage() {
               <div>
                 <p className="font-semibold">Pet Policy</p>
                 <p className="text-sm">Pet Allowed</p>
+                {post.postDetails?.pet === "allowed" ? (
+                  <p>Pets are Allowed</p>
+                ) : (
+                  <p>No Pets Allowed</p>
+                )}
               </div>
             </div>
 
@@ -98,17 +109,18 @@ export default function SinglePage() {
           <div className="flex flex-wrap gap-4 shadow-lg w-full p-4 rounded-md">
             <div className="flex items-center gap-2 bg-white p-4 rounded-md flex-1 min-w-[120px]">
               <img src="size.png" alt="" className="w-6 h-6" />
-              <span>80 sqft</span>
+              <span>{post.postDetails?.size} sqft</span>
             </div>
 
             <div className="flex items-center gap-2 bg-white p-4 rounded-md flex-1 min-w-[120px]">
               <img src="bed.png" alt="" className="w-6 h-6" />
-              <span>2 bedrooms</span>
+              {/* <span>{post.bedroom} bedrooms</span> */}
+              <span>{post.bedRooms} Bedrooms</span>
             </div>
 
             <div className="flex items-center gap-2 bg-white p-4 rounded-md flex-1 min-w-[120px]">
               <img src="bath.png" alt="" className="w-6 h-6" />
-              <span className="">1 bathroom</span>
+              <span className="">{post.bathRooms} Bathroom</span>
             </div>
           </div>
         </div>
@@ -121,7 +133,9 @@ export default function SinglePage() {
               <img src="school.png" alt="School" className="w-6 h-6" />
               <div>
                 <span className="font-medium">School</span>
-                <p className="text-sm text-gray-500">250m away</p>
+                <p className="text-sm text-gray-500">
+                  {post.postDetails?.school}m away
+                </p>
               </div>
             </div>
 
@@ -129,7 +143,9 @@ export default function SinglePage() {
               <img src="restaurant.png" alt="Restaurant" className="w-6 h-6" />
               <div>
                 <span className="font-medium">Restaurant</span>
-                <p className="text-sm text-gray-500">100m away</p>
+                <p className="text-sm text-gray-500">
+                  {post.postDetails?.restaurant}m away
+                </p>
               </div>
             </div>
 
@@ -137,7 +153,9 @@ export default function SinglePage() {
               <img src="bus.png" alt="Bus" className="w-6 h-6" />
               <div>
                 <span className="font-medium">Bus</span>
-                <p className="text-sm text-gray-500">150m away</p>
+                <p className="text-sm text-gray-500">
+                  {post.postDetails?.bus}m away
+                </p>
               </div>
             </div>
           </div>
@@ -149,7 +167,7 @@ export default function SinglePage() {
           <div className="flex flex-col gap-6 w-full">
             {/* Map */}
             <div className="w-full h-96 rounded-xl overflow-hidden shadow-lg">
-              <Map items={[singlePageData]} />
+              <Map items={[post]} />
             </div>
 
             {/* Buttons */}

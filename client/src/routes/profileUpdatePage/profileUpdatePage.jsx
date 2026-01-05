@@ -3,10 +3,11 @@ import { motion } from "motion/react";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import apiRequest from "../../lib/apiRequest";
+import UploadWidget from "../../components/uploadWidget/UploadWidget.jsx";
 
 export default function ProfileUpdatePage() {
-  const [avatar, setAvatar] = useState([]);
   const { currentUser, updateUser } = useContext(AuthContext);
+  const [avatar, setAvatar] = useState(currentUser.avatar || "");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -32,6 +33,7 @@ export default function ProfileUpdatePage() {
       setError(error.response.data.message || "Profile update failed");
     }
   };
+
   return (
     <div className="min-h-screen items-center justify-center bg-gray-100 px-4 flex flex-col lg:flex-row gap-10 py-10">
       <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-6">
@@ -99,24 +101,34 @@ export default function ProfileUpdatePage() {
 
           {/* Button */}
 
-          <motion.button
+          <button
             type="submit"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ duration: 0.2 }}
+            // whileHover={{ scale: 1.05 }}
+            // whileTap={{ scale: 0.95 }}
+            // transition={{ duration: 0.2 }}
             className="w-full bg-blue-600 text-white py-2 rounded-md  hover:bg-blue-700 transition"
           >
             Update Profile
-          </motion.button>
+          </button>
           {error && <span className="text-red-500 text-sm">{error}</span>}
         </form>
       </div>
 
       <div className="sideContainer">
         <img
-          src={avatar[0] || currentUser.avatar || "/noavatar.jpg"}
-          alt=""
+          src={avatar || currentUser.avatar || "/noavatar.jpg"}
+          alt="avatar"
           className="w-32 h-32 object-cover rounded-full mx-auto"
+        />
+        <UploadWidget
+          uwConfig={{
+            cloudName: "drmvvxl0g",
+            uploadPreset: "estate",
+            multiple: false,
+            maxImageFileSize: 2000000, // 2MB
+            folder: "avatars",
+          }}
+          setAvatar={setAvatar}
         />
       </div>
     </div>
