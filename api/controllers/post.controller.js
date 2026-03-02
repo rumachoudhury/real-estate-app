@@ -2,7 +2,20 @@ import prisma from "../lib/prisma.js";
 
 // Get All Posts
 export const getPosts = async (req, res) => {
-  const posts = await prisma.post.findMany();
+  const query = req.query;
+  console.log("Query params:", query);
+  const posts = await prisma.post.findMany({
+    where: {
+      city: query.city || undefined,
+      type: query.type || undefined,
+      property: query.property || undefined,
+      bedRooms: parseInt(query.bedRooms) || undefined,
+      price: {
+        gte: parseInt(query.minPrice) || 0,
+        lte: parseInt(query.maxPrice) || 10000000,
+      },
+    },
+  });
   try {
     // res.status(200).json({ message: "Get posts success" });
     res.status(200).json(posts);
@@ -32,28 +45,6 @@ export const getPost = async (req, res) => {
     res.status(500).json({ message: "Fail to get post" });
   }
 };
-
-// Create Post
-// export const addPost = async (req, res) => {
-//   const body = req.body;
-//   const tokenUserId = req.userId;
-//   try {
-//     const newPost = await prisma.post.create({
-//       data: {
-//         ...body.postData,
-//         userId: tokenUserId,
-//         postDetails: {
-//           create: body.postDetails,
-//         },
-//       },
-//     });
-
-//     res.status(200).json(newPost);
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).json({ message: "Fail to add post" });
-//   }
-// };
 
 export const addPost = async (req, res) => {
   const { postData, postDetails } = req.body;

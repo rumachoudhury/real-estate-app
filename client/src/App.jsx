@@ -75,6 +75,7 @@ import ProfileUpdatePage from "./routes/profileUpdatePage/profileUpdatePage";
 import NewPostPage from "./routes/newPostPage/newPostPage";
 
 import { singlePageLoader } from "./lib/loaders";
+import { listPageLoader } from "./lib/loaders";
 
 const router = createBrowserRouter([
   //createBrowserRouter used for loaders
@@ -85,7 +86,7 @@ const router = createBrowserRouter([
       { index: true, element: <HomePage /> }, //index: true used for default route
       { path: "register", element: <Register /> },
       { path: "login", element: <Login /> },
-      { path: "listpage", element: <ListPage /> },
+      { path: "list", element: <ListPage />, loader: listPageLoader },
       { path: "about", element: <About /> },
 
       {

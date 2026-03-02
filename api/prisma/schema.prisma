@@ -21,24 +21,7 @@ model User {
 
 }
 
-// model Post{
-//     id String @id @default(auto()) @map("_id") @db.ObjectId // MongoDB specific ID field
-//     title  String
-//     price Int
-//     img String
-//     address String
-//     city String
-//     bedroom Int
-//     bathroom Int
-//     latitute String
-//     longitute String
-//     type Type
-//     peoperty Property
-//     createdAt DateTime @default(now())
-//     user User @relation(fields: [userId], references: [id])
-//     userId String @db.objectId
 
-// }
 
 model Post {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
