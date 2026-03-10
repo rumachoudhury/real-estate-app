@@ -3,7 +3,7 @@ import "./styles/About.css"; // <-- updated path
 
 export default function About() {
   return (
-    <section className="min-h-[60vh] flex items-center justify-center bg-gradient-to-br from-violet-50 to-blue-50">
+    <section className="min-h-[61vh] flex items-center justify-center bg-gradient-to-br from-violet-50 to-blue-50">
       <div className="p-8 text-center max-w-xl">
         <h1 className="text-4xl md-text-5xl font-bold mb-4 text-gray-900 ">
           Hello! I'm a Developer
