@@ -3,22 +3,27 @@ import prisma from "../lib/prisma.js";
 // Get All Posts
 export const getPosts = async (req, res) => {
   const query = req.query;
-  console.log("Query params:", query);
-  const posts = await prisma.post.findMany({
-    where: {
-      city: query.city || undefined,
-      type: query.type || undefined,
-      property: query.property || undefined,
-      bedRooms: parseInt(query.bedRooms) || undefined,
-      price: {
-        gte: parseInt(query.minPrice) || 0,
-        lte: parseInt(query.maxPrice) || 10000000,
-      },
-    },
-  });
   try {
+    console.log("Query params:", query);
+    const posts = await prisma.post.findMany({
+      where: {
+        city: query.city || undefined,
+        type: query.type || undefined,
+        property: query.property || undefined,
+        bedRooms: parseInt(query.bedRooms) || undefined,
+        price: {
+          gte: parseInt(query.minPrice) || 0,
+          lte: parseInt(query.maxPrice) || 10000000,
+        },
+      },
+    });
+
     // res.status(200).json({ message: "Get posts success" });
-    res.status(200).json(posts);
+
+    // res.status(200).json(posts);
+    setTimeout(() => {
+      res.status(200).json(posts);
+    }, 3000);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Fil to get posts" });

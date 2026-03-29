@@ -16,7 +16,7 @@ function ListPage() {
         <div className="w-full lg:w-1/2 flex flex-col gap-4">
           <Filter />
           <Suspense fallback={<p>Loading...</p>}>
-            <Await
+            <Await //Its came from react router dom, its used to handle promise in loader
               resolve={data.postResponse}
               errorElement={<p>Error loading posts!</p>}
             >
