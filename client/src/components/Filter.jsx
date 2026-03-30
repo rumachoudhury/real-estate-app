@@ -1,6 +1,25 @@
 import React from "react";
+import { useSearchParams, useState } from "react-router-dom";
 
 export default function Filter() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [query, setQuery] = useState({
+    type: searchParams.get("type") || "",
+    city: searchParams.get("city") || "",
+    property: searchParams.get("property") || 0,
+    minPrice: searchParams.get("minPrice") || 0,
+    maxPrice: searchParams.get("maxPrice") || 10000000,
+    bedroom: searchParams.get("bedroom") || 1,
+  });
+
+  const handleChange = (e) => {
+    setQuery({ ...query, [e.target.name]: e.target.value });
+  };
+
+  const handleFilter = () => {
+    setSearchParams(query);
+  };
+
   return (
     <div className="">
       <h1 className="font-semibold text-3xl mb-6">
@@ -20,6 +39,7 @@ export default function Filter() {
             id="city"
             name="city"
             placeholder="City Location"
+            onChange={handleChange}
           />
         </div>
 
@@ -28,7 +48,7 @@ export default function Filter() {
           {/* Type */}
           <div className="flex flex-col w-40">
             <label htmlFor="type" className="font-medium mb-1">
-              Type
+              Type onChange={handleChange}
             </label>
             <select className="border rounded-lg p-3" name="type" id="type">
               <option value="">Any</option>
@@ -46,6 +66,7 @@ export default function Filter() {
               className="border rounded-lg p-3"
               name="property"
               id="property"
+              onChange={handleChange}
             >
               <option value="house">House</option>
               <option value="apartment">Apartment</option>
@@ -65,6 +86,7 @@ export default function Filter() {
               id="minPrice"
               name="minPrice"
               placeholder="Any"
+              onChange={handleChange}
             />
           </div>
 
@@ -79,6 +101,7 @@ export default function Filter() {
               id="maxPrice"
               name="maxPrice"
               placeholder="Any"
+              onChange={handleChange}
             />
           </div>
 
@@ -93,10 +116,14 @@ export default function Filter() {
               id="bedroom"
               name="bedroom"
               placeholder="Any"
+              onChange={handleChange}
             />
           </div>
           <div>
-            <button className="border   p-3 mt-6   bg-amber-500  rounded-lg">
+            <button
+              onClick={handleFilter}
+              className="border   p-3 mt-6   bg-amber-500  rounded-lg"
+            >
               <img src="/search.png" alt="search" className="w-6 h-6" />
             </button>
           </div>
