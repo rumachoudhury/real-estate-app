@@ -40,6 +40,7 @@ export default function Filter() {
             name="city"
             placeholder="City Location"
             onChange={handleChange}
+            defaultValue={query.city}
           />
         </div>
 
@@ -48,9 +49,15 @@ export default function Filter() {
           {/* Type */}
           <div className="flex flex-col w-40">
             <label htmlFor="type" className="font-medium mb-1">
-              Type onChange={handleChange}
+              Type
             </label>
-            <select className="border rounded-lg p-3" name="type" id="type">
+            <select
+              onChange={handleChange}
+              defaultValue={query.type}
+              className="border rounded-lg p-3"
+              name="type"
+              id="type"
+            >
               <option value="">Any</option>
               <option value="buy">Buy</option>
               <option value="rent">Rent</option>
@@ -67,7 +74,9 @@ export default function Filter() {
               name="property"
               id="property"
               onChange={handleChange}
+              defaultValue={query.property}
             >
+              <option value="">Any</option>
               <option value="house">House</option>
               <option value="apartment">Apartment</option>
               <option value="condo">Condo</option>
@@ -87,6 +96,7 @@ export default function Filter() {
               name="minPrice"
               placeholder="Any"
               onChange={handleChange}
+              defaultValue={query.minPrice}
             />
           </div>
 
@@ -102,6 +112,7 @@ export default function Filter() {
               name="maxPrice"
               placeholder="Any"
               onChange={handleChange}
+              defaultValue={query.maxPrice}
             />
           </div>
 
@@ -117,6 +128,7 @@ export default function Filter() {
               name="bedroom"
               placeholder="Any"
               onChange={handleChange}
+              defaultValue={query.bedroom}
             />
           </div>
           <div>
