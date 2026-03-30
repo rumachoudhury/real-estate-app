@@ -1,5 +1,6 @@
 import React from "react";
-import { useSearchParams, useState } from "react-router-dom";
+import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 export default function Filter() {
   const [searchParams, setSearchParams] = useSearchParams();
