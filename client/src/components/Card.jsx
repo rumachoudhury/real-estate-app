@@ -16,7 +16,7 @@ function Card({ item }) {
         {/* Image */}
         <Link to={`/${item.id}`} className="flex shrink-0">
           <img
-            src={item.img}
+            src={item.images?.[0]}
             alt={item.title}
             className="w-full md:w-64 h-40 md:h-40 rounded-lg object-cover cursor-pointer hidden sm:block"
           />
