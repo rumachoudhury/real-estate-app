@@ -7,10 +7,14 @@ export default function Filter() {
   const [query, setQuery] = useState({
     type: searchParams.get("type") || "",
     city: searchParams.get("city") || "",
-    property: searchParams.get("property") || 0,
-    minPrice: searchParams.get("minPrice") || 0,
-    maxPrice: searchParams.get("maxPrice") || 10000000,
-    bedroom: searchParams.get("bedroom") || 1,
+    property: searchParams.get("property") || "",
+    // minPrice: searchParams.get("minPrice") || 0,
+    // maxPrice: searchParams.get("maxPrice") || 10000000,
+    // bedroom: searchParams.get("bedroom") || 1,
+
+    minPrice: searchParams.get("minPrice") || "",
+    maxPrice: searchParams.get("maxPrice") || "",
+    bedroom: searchParams.get("bedroom") || "",
   });
 
   const handleChange = (e) => {
@@ -18,13 +22,22 @@ export default function Filter() {
   };
 
   const handleFilter = () => {
-    setSearchParams(query);
+    const cleanedQuery = {};
+
+    Object.keys(query).forEach((key) => {
+      if (query[key] !== "" && query[key] !== 0) {
+        cleanedQuery[key] = query[key];
+      }
+    });
+
+    setSearchParams(cleanedQuery);
+    // setSearchParams(query);
   };
 
   return (
     <div className="">
       <h1 className="font-semibold text-3xl mb-6">
-        Search results for <strong>United States</strong>
+        Search results for <strong>{searchParams.get("city")}</strong>
       </h1>
 
       <div className="flex flex-col w-full p-6 bg-white shadow-sm rounded-xl">

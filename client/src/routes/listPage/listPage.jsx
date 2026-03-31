@@ -60,7 +60,7 @@ function ListPage() {
               errorElement={<p>Error loading posts!</p>}
             >
               {(postResponse) => {
-                const posts = postResponse.data;
+                const posts = postResponse?.data || [];
                 return (
                   <>
                     {posts.map((post) => (
