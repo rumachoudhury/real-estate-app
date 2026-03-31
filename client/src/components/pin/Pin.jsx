@@ -17,7 +17,7 @@ function Pin({ item }) {
             alt={item.title}
             className="w-32 h-20 object-cover mb-2"
           />
-          console.log(item.images?.[0]);
+
           {/* <img
             src={imgSrc}
             alt={item.title}
