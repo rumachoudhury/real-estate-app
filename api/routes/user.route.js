@@ -17,4 +17,6 @@ router.put("/:id", verifyToken, updateUser);
 
 router.delete("/:id", verifyToken, deleteUser);
 
+router.post("/save", verifyToken, savePostr);
+
 export default router;
