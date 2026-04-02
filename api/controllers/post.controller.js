@@ -1,4 +1,5 @@
 import prisma from "../lib/prisma.js";
+import jwt from "jsonwebtoken";
 
 // Get All Posts
 export const getPosts = async (req, res) => {
@@ -44,6 +45,16 @@ export const getPost = async (req, res) => {
         },
       },
     });
+
+    let userId;
+    const token = req.cookie.token;
+
+    if (!token) {
+      userId = null;
+    } else {
+      jwt.verify(token, process.env.JWT_SECRET, async (error, payload) => {});
+    }
+
     res.status(200).json(post);
   } catch (error) {
     console.log(error);
