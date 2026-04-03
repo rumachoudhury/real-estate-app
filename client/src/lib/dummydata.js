@@ -2,7 +2,7 @@ const listData = [
   {
     id: 1,
     title: "Apartment in city center",
-    img: "/photo-1556438758-8d49568ce18e.avif",
+    images: "/photo-1556438758-8d49568ce18e.avif",
     bedrooms: 1,
     bathrooms: 1,
     price: 800,
@@ -13,7 +13,7 @@ const listData = [
   {
     id: 2,
     title: "Luxury Condo with Sea View",
-    img: "/photo-1609766857041-ed402ea8069a.avif",
+    images: "/photo-1609766857041-ed402ea8069a.avif",
     bedrooms: 3,
     bathrooms: 2,
     price: 2500,
@@ -24,7 +24,7 @@ const listData = [
   {
     id: 3,
     title: "Cozy Suburban House",
-    img: "/photo-1621293954908-907159247fc8.avif",
+    imges: "/photo-1621293954908-907159247fc8.avif",
     bedrooms: 4,
     bathrooms: 3,
     price: 1800,
@@ -35,7 +35,7 @@ const listData = [
   {
     id: 4,
     title: "Modern Loft Downtown",
-    img: "/photo-1631049307264-da0ec9d70304.avif",
+    images: "/photo-1631049307264-da0ec9d70304.avif",
     bedrooms: 2,
     bathrooms: 1,
     price: 1500,
@@ -46,7 +46,7 @@ const listData = [
   {
     id: 5,
     title: "Spacious Family Home",
-    img: "/photo-1702014859878-5d4743176d28.avif",
+    imges: "/photo-1702014859878-5d4743176d28.avif",
     bedrooms: 5,
     bathrooms: 4,
     price: 3200,
@@ -57,7 +57,7 @@ const listData = [
   {
     id: 6,
     title: "Charming Cottage",
-    img: "/visualsofdana-T5pL6ciEn-I-unsplash.jpg",
+    imges: "/visualsofdana-T5pL6ciEn-I-unsplash.jpg",
     bedrooms: 2,
     bathrooms: 1,
     price: 950,
@@ -68,7 +68,7 @@ const listData = [
   {
     id: 7,
     title: "Modern Family Home",
-    img: "/photo-1675409145919-277c0fc2aa7d.avif",
+    imges: "/photo-1675409145919-277c0fc2aa7d.avif",
     bedrooms: 3,
     bathrooms: 2,
     price: 1350,
@@ -79,7 +79,7 @@ const listData = [
   {
     id: 8,
     title: "Luxury Penthouse Suite",
-    img: "/premium_photo-1661964402307-02267d1423f5.avif",
+    imges: "/premium_photo-1661964402307-02267d1423f5.avif",
     bedrooms: 4,
     bathrooms: 3,
     price: 2800,
@@ -90,7 +90,7 @@ const listData = [
   {
     id: 9,
     title: "Cozy Urban Studio",
-    img: "/premium_photo-1661962340349-6ea59fff7e7b.avif",
+    imges: "/premium_photo-1661962340349-6ea59fff7e7b.avif",
     bedrooms: 1,
     bathrooms: 1,
     price: 750,
@@ -101,7 +101,7 @@ const listData = [
   {
     id: 10,
     title: "Spacious Suburban Villa",
-    img: "/premium_photo-1661964402307-02267d1423f5.avif",
+    imges: "/premium_photo-1661964402307-02267d1423f5.avif",
     bedrooms: 5,
     bathrooms: 4,
     price: 3200,
@@ -141,7 +141,9 @@ export const userData = {
   id: 1,
   name: "John Doe",
   title: "Apartment in city center",
-  img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=2861&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M",
+  imges: [
+    "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=2861&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M",
+  ],
   bedrooms: 1,
   bathrooms: 1,
   price: 800,

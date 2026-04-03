@@ -1,16 +1,34 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 // import { singlePageData, userData } from "../../lib/dummydata";
 import Map from "../../components/map/Map.jsx";
 import Slider from "../../components/slider/Slider";
-import { useLoaderData } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { Navigate, useLoaderData, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext.jsx";
+import apiRequest from "../../lib/apiRequest.js";
 
 export default function SinglePage() {
   const post = useLoaderData();
-  const { id } = useParams();
-  console.log(id);
 
-  console.log(post);
+  const [saved, setSaved] = useState(post.isSaved);
+
+  const { currentUser } = useContext(AuthContext);
+  const Navigater = useNavigate();
+
+  const handleSave = async () => {
+    if (!currentUser) {
+      Navigater("/login"); //
+      return; // Redirect to login if not authenticated
+    }
+
+    // AFTER REACT 19 UPDATE TO USEOPTIMISTIK HOOK
+    setSaved((prev) => !prev);
+    try {
+      await apiRequest.post("/users/save", { postId: post.id });
+    } catch (err) {
+      console.log(err);
+      setSaved((prev) => !prev);
+    }
+  };
 
   return (
     <div className="w-full flex flex-col lg:flex-row items-start gap-10 px-4 md:px-10 py-10 lg:py-16">
@@ -176,11 +194,21 @@ export default function SinglePage() {
                 <img src="/chat.png" alt="" className="w-6 h-6" />
                 <p>Send a Message</p>
               </div>
-
+              {/* 
               <div className="flex flex-1 min-w-[180px] items-center justify-center gap-3 py-2 px-6 rounded-lg bg-amber-300 font-medium shadow hover:bg-amber-400 transition">
                 <img src="/save.png" alt="" className="w-6 h-6" />
                 <p>Save The Place</p>
-              </div>
+              </div> */}
+
+              <button
+                onClick={handleSave}
+                style={{
+                  backgroundColor: saved ? "#fece51" : "white",
+                }}
+              >
+                <img src="/save.png" alt="" />
+                {saved ? "Place Saved" : "Save the Place"}
+              </button>
             </div>
           </div>
         </div>

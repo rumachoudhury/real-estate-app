@@ -32,59 +32,45 @@ export const getPosts = async (req, res) => {
 };
 
 // Get Single Post
+// controllers/post.controller.js
 export const getPost = async (req, res) => {
-  const { id } = req.params;
+  const { id } = req.params; // the post ID
+  let userId = null;
 
-  // Check if ID is valid
-  if (!id) return res.status(400).json({ message: "Post ID missing" });
+  // Get user ID from token (if exists)
+  const token = req.cookies?.token;
+  if (token) {
+    try {
+      const payload = jwt.verify(token, process.env.JWT_SECRET);
+      userId = payload.id;
+    } catch (err) {
+      userId = null;
+    }
+  }
 
   try {
+    // Get the post
     const post = await prisma.post.findUnique({
       where: { id },
-
       include: {
         postDetails: true,
-        user: {
-          select: { username: true, avatar: true },
-        },
+        user: { select: { username: true, avatar: true } },
       },
     });
 
-    if (!post) return res.status(404).json({ message: "Post not found" });
+    // Check if user has saved this post
+    const saved = userId
+      ? await prisma.savedPost.findUnique({
+          where: {
+            userId_postId: {
+              userId,
+              postId: id,
+            },
+          },
+        })
+      : null;
 
-    let userId;
-    const token = req.cookies.token;
-
-    // if (!token) {
-    //   userId = null;
-    // } else {
-    //   jwt.verify(token, process.env.JWT_SECRET, async (error, payload) => {
-    //     if (error) {
-    //       userId = null;
-    //     } else {
-    //       userId = payload.id;
-    //     }
-    //   });
-    // }
-
-    if (token) {
-      try {
-        const payload = jwt.verify(token, process.env.JWT_SECRET);
-        userId = payload.id;
-      } catch (err) {
-        userId = null;
-      }
-    }
-
-    const saved = await prisma.savedPost.findUnique({
-      where: {
-        userId_postId: {
-          userId,
-          postId: id,
-        },
-      },
-    });
-
+    // Send response
     res.status(200).json({ ...post, isSaved: saved ? true : false });
   } catch (error) {
     console.log(error);
