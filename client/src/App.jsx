@@ -90,8 +90,12 @@ const router = createBrowserRouter([
       { path: "about", element: <About /> },
 
       {
-        path: ":id",
-        // path: "posts/:id",
+        // path: ":id",
+        // // path: "posts/:id",
+        // element: <SinglePage />,
+        // loader: singlePageLoader,
+
+        path: "singlepage/:id",
         element: <SinglePage />,
         loader: singlePageLoader,
       },

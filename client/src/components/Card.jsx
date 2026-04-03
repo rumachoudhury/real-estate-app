@@ -14,7 +14,8 @@ function Card({ item }) {
         transition={{ duration: 0.5 }}
       >
         {/* Image */}
-        <Link to={`/${item.id}`} className="flex shrink-0">
+        {/* <Link to={`/${item.id}`} className="flex shrink-0"> */}
+        <Link to={`/singlepage/${item.id}`} className="flex shrink-0">
           <img
             src={item.images?.[0]}
             alt={item.title}
@@ -28,7 +29,8 @@ function Card({ item }) {
           {/* Title & Address */}
           <div className="space-y-2 items-start flex flex-col">
             <h2 className="font-bold text-lg">
-              <Link to={`/${item.id}`} className="hover:underline">
+              {/* <Link to={`/${item.id}`} className="hover:underline"> */}
+              <Link to={`/singlepage/${item.id}`} className="hover:underline">
                 {item.title}
               </Link>
             </h2>

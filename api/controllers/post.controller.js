@@ -34,6 +34,10 @@ export const getPosts = async (req, res) => {
 // Get Single Post
 export const getPost = async (req, res) => {
   const { id } = req.params;
+
+  // Check if ID is valid
+  if (!id) return res.status(400).json({ message: "Post ID missing" });
+
   try {
     const post = await prisma.post.findUnique({
       where: { id },
@@ -46,22 +50,33 @@ export const getPost = async (req, res) => {
       },
     });
 
-    let userId;
-    const token = req.cookie.token;
+    if (!post) return res.status(404).json({ message: "Post not found" });
 
-    if (!token) {
-      userId = null;
-    } else {
-      jwt.verify(token, process.env.JWT_SECRET, async (error, payload) => {
-        if (error) {
-          userId = null;
-        } else {
-          userId = payload.id;
-        }
-      });
+    let userId;
+    const token = req.cookies.token;
+
+    // if (!token) {
+    //   userId = null;
+    // } else {
+    //   jwt.verify(token, process.env.JWT_SECRET, async (error, payload) => {
+    //     if (error) {
+    //       userId = null;
+    //     } else {
+    //       userId = payload.id;
+    //     }
+    //   });
+    // }
+
+    if (token) {
+      try {
+        const payload = jwt.verify(token, process.env.JWT_SECRET);
+        userId = payload.id;
+      } catch (err) {
+        userId = null;
+      }
     }
 
-    const saved = prisma.savedPost.findUnique({
+    const saved = await prisma.savedPost.findUnique({
       where: {
         userId_postId: {
           userId,
@@ -70,7 +85,7 @@ export const getPost = async (req, res) => {
       },
     });
 
-    res.status(200).json(post);
+    res.status(200).json({ ...post, isSaved: saved ? true : false });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Fail to get post" });

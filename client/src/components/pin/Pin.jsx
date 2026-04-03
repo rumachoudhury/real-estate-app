@@ -25,7 +25,11 @@ function Pin({ item }) {
           /> */}
           {/* text */}
           <div className="flex flex-col items-center gap-1">
-            <Link to={`/${item.id}`} className="text-blue-500 font-bold">
+            {/* <Link to={`/${item.id}`} className="text-blue-500 font-bold"> */}
+            <Link
+              to={`/singlepage/${item.id}`}
+              className="text-blue-500 font-bold"
+            >
               {item.title}
             </Link>
             <span>{item.bedroom} bedroom</span>
