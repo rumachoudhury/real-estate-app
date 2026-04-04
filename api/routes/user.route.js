@@ -5,6 +5,7 @@ import {
   getUsers,
   updateUser,
   savePost,
+  profilePosts,
 } from "../controllers/user.controller.js";
 import { verifyToken } from "../middleware/verifyToken.js";
 
