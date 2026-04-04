@@ -20,7 +20,14 @@ export const singlePageLoader = async ({ params }) => {
   }
 };
 
-export const listPageLoader = async ({ request }) => {
+export const listPageLoader = async () => {
+  const postPromise = apiRequest("/user/profilePosts");
+  return defer({
+    postResponse: postPromise,
+  });
+};
+
+export const profilePageLoader = async ({ request }) => {
   const query = request.url.split("?")[1] || "";
   const postPromise = apiRequest("/posts?" + query);
   return defer({
