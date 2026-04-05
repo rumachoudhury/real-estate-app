@@ -74,7 +74,7 @@ import About from "./components/About";
 import ProfileUpdatePage from "./routes/profileUpdatePage/profileUpdatePage";
 import NewPostPage from "./routes/newPostPage/newPostPage";
 
-import { singlePageLoader } from "./lib/loaders";
+import { profilePageLoader, singlePageLoader } from "./lib/loaders";
 import { listPageLoader } from "./lib/loaders";
 
 const router = createBrowserRouter([
@@ -103,7 +103,12 @@ const router = createBrowserRouter([
       {
         element: <RequireAuth />,
         children: [
-          { path: "profile", element: <ProfilePage /> },
+          {
+            path: "profile",
+            element: <ProfilePage />,
+
+            loader: profilePageLoader,
+          },
           { path: "profile/update/:id", element: <ProfileUpdatePage /> },
           { path: "add", element: <NewPostPage /> },
         ],

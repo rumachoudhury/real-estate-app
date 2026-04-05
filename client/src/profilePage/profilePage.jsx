@@ -3,10 +3,12 @@ import List from "../components/List";
 import Chat from "../components/Chat";
 import { gsap } from "gsap";
 import apiRequest from "../lib/apiRequest";
-import { useNavigate } from "react-router-dom";
+import { Await, useLoaderData, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { Link } from "react-router-dom";
+import { Suspense } from "react";
 export default function ProfilePage() {
+  const data = useLoaderData();
   const { updateUser, currentUser } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -103,6 +105,15 @@ export default function ProfilePage() {
             </Link>
           </div>
 
+          <Suspense fallback={<p>Loading...</p>}>
+            <Await
+              resolve={data.postResponse}
+              errorElement={<p>Error loading posts!</p>}
+            >
+              {(postResponse) => <List posts={postResponse.data.userPosts} />}
+            </Await>
+          </Suspense>
+
           <List />
 
           {/* SAVED LIST */}
@@ -110,7 +121,15 @@ export default function ProfilePage() {
             <h1 className="text-xl font-semibold">Saved List</h1>
           </div>
 
-          <List />
+          {/* <List /> */}
+          <Suspense fallback={<p>Loading...</p>}>
+            <Await
+              resolve={data.postResponse}
+              errorElement={<p>Error loading posts!</p>}
+            >
+              {(postResponse) => <List posts={postResponse.data.savedPosts} />}
+            </Await>
+          </Suspense>
         </div>
       </div>
 
