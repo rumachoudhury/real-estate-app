@@ -18,6 +18,9 @@ model User {
     createdAt DateTime @default(now())
     posts Post[] //single user can have multiple posts thats why we use empty array
      savedPosts SavedPost[]
+     chats Chat[] @relation(fields: [chatIDs], references: [id])
+     chatIDs String[] @db.ObjectId // Store chat IDs as an array of strings
+
 
 
 }
@@ -102,4 +105,15 @@ model SavedPost {
   createdAt DateTime @default(now())
 
   @@unique([userId, postId]) // <- THIS allows findUnique by userId+postId
+
+
+}
+
+model Chat{
+   id        String   @id @map("_id") @default(auto()) @db.ObjectId
+   users     User[]    @relation(fields: [userIDs], references: [id])
+   userIDs String[]  
+  createdAt DateTime @default(now())
+  messages  Message[]
+  lastMessage String?
 }
