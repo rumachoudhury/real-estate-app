@@ -114,6 +114,18 @@ model Chat{
    users     User[]    @relation(fields: [userIDs], references: [id])
    userIDs String[]  
   createdAt DateTime @default(now())
-  messages  Message[]
+  seenBy String[] // Array of user IDs who have seen the last message
+  message Message[]
   lastMessage String?
+}
+
+model Message{
+   id        String   @id @map("_id") @default(auto()) @db.ObjectId
+   text String
+  //  users     User[]    @relation(fields: [userIDs], references: [id])
+   userIDs String[]  
+   chat Chat @relation(fields: [chatId], references: [id])
+    chatId String @db.ObjectId
+  createdAt DateTime @default(now())
+ 
 }
