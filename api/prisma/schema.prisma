@@ -18,7 +18,7 @@ model User {
     createdAt DateTime @default(now())
     posts Post[] //single user can have multiple posts thats why we use empty array
      savedPosts SavedPost[]
-     chats Chat[] @relation(fields: [chatIDs], references: [id])
+    //  chats Chat[] 
      chatIDs String[] @db.ObjectId // Store chat IDs as an array of strings
 
 
@@ -111,7 +111,7 @@ model SavedPost {
 
 model Chat{
    id        String   @id @map("_id") @default(auto()) @db.ObjectId
-   users     User[]    @relation(fields: [userIDs], references: [id])
+  //  users     User[]    
    userIDs String[]  
   createdAt DateTime @default(now())
   seenBy String[] // Array of user IDs who have seen the last message
