@@ -5,8 +5,11 @@ import postRoute from "./routes/post.route.js";
 import authRoute from "./routes/auth.route.js";
 import testRoute from "./routes/test.route.js";
 import userRoute from "./routes/user.route.js";
+import chatRoute from "./routes/test.route.js";
+import messageRoute from "./routes/user.route.js";
 
 import dotenv from "dotenv";
+import Chat from "../client/src/components/Chat";
 
 dotenv.config(); // ✅ Load .env before using any variable
 
@@ -48,6 +51,8 @@ app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/posts", postRoute);
 app.use("/api/test", testRoute);
+app.use("/api/chats", testRoute);
+app.use("/api/messages", testRoute);
 
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
