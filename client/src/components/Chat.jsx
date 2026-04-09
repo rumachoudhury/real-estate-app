@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function Chat() {
+export default function Chat(chats) {
   const [chat, setChat] = useState(true);
   return (
     <div className="flex flex-col bg-fuchsia-50 p-4 sm:p-6 lg:p-10 h-auto lg:h-screen">

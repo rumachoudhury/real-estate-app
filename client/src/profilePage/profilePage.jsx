@@ -136,7 +136,16 @@ export default function ProfilePage() {
       {/* RIGHT: CHAT */}
       <div className="chatContainer w-full lg:w-1/3 border-t lg:border-t-0 lg:border-l">
         <div className="wrapper p-4 lg:p-6">
-          <Chat />
+          {/* <Chat /> */}
+
+          <Suspense fallback={<p>Loading...</p>}>
+            <Await
+              resolve={data.ChatResponse}
+              errorElement={<p>Error loading chat!</p>}
+            >
+              {(chatResponse) => <Chat chats={chatResponse.data} />}
+            </Await>
+          </Suspense>
         </div>
       </div>
     </div>
