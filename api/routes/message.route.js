@@ -6,17 +6,19 @@ export const addMessage = async (req, res) => {
   const text = req.body.text;
 
   try {
-    const chat = await prisma.chat.findUnique({
+    // const chat = await prisma.chat.findUnique({
+    const chat = await prisma.chat.findFirst({
       where: {
         id: chatId,
         userIDs: {
-          hasSome: [tokenUserId],
+          hasSome: [tokenUserId], // Ensure the user is part of the chat
         },
       },
     });
 
     if (!chat) return res.status(404).json({ message: "Chat not found!" });
 
+    // Create the new message
     const message = await prisma.message.create({
       data: {
         text,
@@ -25,6 +27,7 @@ export const addMessage = async (req, res) => {
       },
     });
 
+    // Update the chat's lastMessage and seenBy fields
     await prisma.chat.update({
       where: {
         id: chatId,
