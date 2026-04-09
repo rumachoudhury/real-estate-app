@@ -30,7 +30,9 @@ export const listPageLoader = async () => {
 export const profilePageLoader = async ({ request }) => {
   const query = request.url.split("?")[1] || "";
   const postPromise = apiRequest("/posts?" + query);
+  const chatPromise = apiRequest("/chats");
   return defer({
     postResponse: postPromise,
+    chatResponse: chatPromise,
   });
 };
