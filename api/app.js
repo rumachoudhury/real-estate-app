@@ -9,7 +9,6 @@ import chatRoute from "./routes/test.route.js";
 import messageRoute from "./routes/user.route.js";
 
 import dotenv from "dotenv";
-import Chat from "../client/src/components/Chat";
 
 dotenv.config(); // ✅ Load .env before using any variable
 

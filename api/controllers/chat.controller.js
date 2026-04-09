@@ -57,11 +57,13 @@ export const getChat = async (req, res) => {
     });
 
     await prisma.chat.update({
+      // mark messages as seen when chat is opened
       where: {
         id: req.params.id,
       },
       data: {
         seenBy: {
+          // add user to seenBy array if not already there
           push: [tokenUserId],
         },
       },

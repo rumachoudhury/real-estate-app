@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 // Check if user is logged in
 export const shouldBeLoggedIn = async (req, res) => {
   console.log(req.userId);
-  res.status(200).json({ message: "You are Authenticated" });
+  res.status(200).json({ message: "You are already Authenticated" });
 };
 
 // Check if user is admin
