@@ -155,7 +155,8 @@
 // }
 
 // -----------------------------
-import { useContext, useEffect, useRef, useState } from "react";
+
+import React, { useContext, useEffect, useRef, useState } from "react";
 
 import { AuthContext } from "../context/AuthContext";
 import apiRequest from "../lib/apiRequest";
@@ -166,6 +167,7 @@ import { useNotificationStore } from "../lib/notificationStore";
 
 function Chat({ chats }) {
   const [chat, setChat] = useState(null);
+  // const { currentUser } = useContext(AuthContext);
   const { currentUser } = useContext(AuthContext);
   const { socket } = useContext(SocketContext);
 
